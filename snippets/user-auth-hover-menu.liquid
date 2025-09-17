@@ -1,0 +1,24 @@
+{% comment %}
+  用户认证Hover菜单组件 - iframe版本
+  嵌入第三方页面显示登录/注册按钮
+{% endcomment %}
+
+<div class="auth-hover-menu auth-hover-menu--iframe" id="authHoverMenu" style="display: none !important;">
+  <iframe 
+    id="authHoverIframe"
+    class="auth-hover-iframe" 
+    src="https://api.lonelyhub.cn/shopify-showcase/auth-menu"
+    title="认证菜单"
+    sandbox="allow-same-origin allow-scripts allow-forms"
+  ></iframe>
+  <div class="auth-hover-fallback" style="display: none;">
+    <div class="auth-menu-card">
+      <button class="auth-btn auth-btn--login" data-modal="login" type="button">
+        Log In
+      </button>
+      <a href="#" class="auth-link" data-modal="register">
+        Join Now
+      </a>
+    </div>
+  </div>
+</div>

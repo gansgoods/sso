@@ -1,0 +1,39 @@
+{% comment %}
+  登录弹窗模态框组件
+  仿Anker风格的登录界面
+{% endcomment %}
+
+<div class="auth-modal" id="loginModal" style="display: none;">
+  <div class="auth-modal__backdrop" data-modal-close></div>
+  <div class="auth-modal__content">
+    <div class="auth-modal__header">
+      <button class="auth-modal__back" data-modal-back type="button" aria-label="返回">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="auth-modal__close" data-modal-close type="button" aria-label="关闭">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="auth-modal__body auth-modal__body--iframe">
+      <div class="auth-iframe-container">
+        <iframe
+          id="loginIframe"
+          class="auth-iframe"
+          {% comment %}src="https://ucenter.qingcheng100.cn/index/user/login.html"{% endcomment %}
+          src="https://api.lonelyhub.cn/shopify-showcase/fashion-store"
+          title="登录页面"
+          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+        ></iframe>
+        <div class="auth-iframe-fallback" style="display: none;">
+          <h3>无法加载外部登录页面</h3>
+          <p>请直接访问: <a href="https://ucenter.qingcheng100.cn/index/user/login.html" target="_blank">https://ucenter.qingcheng100.cn/index/user/login.html</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
