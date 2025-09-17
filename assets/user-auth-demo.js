@@ -41,6 +41,7 @@ class UserAuthModals {
   }
   
   initializeDisplay() {
+    console.log('initializeDisplay called');
     // 确保hover菜单初始化完成后才显示
     if (this.elements.hoverMenu) {
       // 检查CSS是否完全加载
@@ -48,14 +49,20 @@ class UserAuthModals {
       const cssContent = bodyStyle.getPropertyValue('content');
       const cssLoaded = cssContent.includes('user-auth-css-loaded');
       
+      console.log('CSS loaded:', cssLoaded, 'CSS content:', cssContent);
+      
       if (cssLoaded) {
         // CSS已加载，安全移除内联样式
         this.elements.hoverMenu.style.display = '';
         this.elements.hoverMenu.classList.add('ready');
+        console.log('Added ready class to hover menu');
       } else {
         // CSS未加载，等待CSS加载完成
+        console.log('CSS not loaded, waiting...');
         this.waitForCSS();
       }
+    } else {
+      console.log('Hover menu not found in initializeDisplay');
     }
   }
   
@@ -93,13 +100,39 @@ class UserAuthModals {
     this.elements.hoverMenu = document.getElementById('authHoverMenu');
     this.elements.loginModal = document.getElementById('loginModal');
     this.elements.registerModal = document.getElementById('registerModal');
+    
+    // 调试信息
+    console.log('UserAuthModals - Elements found:', {
+      accountIcon: !!this.elements.accountIcon,
+      hoverMenu: !!this.elements.hoverMenu,
+      loginModal: !!this.elements.loginModal,
+      registerModal: !!this.elements.registerModal
+    });
+    
+    if (!this.elements.accountIcon) {
+      console.log('Account icon not found, checking alternative selectors...');
+      // 尝试其他可能的选择器
+      this.elements.accountIcon = document.querySelector('[aria-label="Account"]');
+      if (this.elements.accountIcon) {
+        console.log('Found account icon with aria-label selector');
+      }
+    }
   }
   
   bindEvents() {
     // 账户图标hover事件
     if (this.elements.accountIcon) {
-      this.elements.accountIcon.addEventListener('mouseenter', () => this.showHoverMenu());
-      this.elements.accountIcon.addEventListener('mouseleave', () => this.hideHoverMenu());
+      console.log('Binding hover events to account icon');
+      this.elements.accountIcon.addEventListener('mouseenter', () => {
+        console.log('Account icon mouseenter');
+        this.showHoverMenu();
+      });
+      this.elements.accountIcon.addEventListener('mouseleave', () => {
+        console.log('Account icon mouseleave');
+        this.hideHoverMenu();
+      });
+    } else {
+      console.log('Account icon not found, cannot bind hover events');
     }
     
     // hover菜单事件
@@ -200,13 +233,19 @@ class UserAuthModals {
   }
   
   showHoverMenu() {
+    console.log('showHoverMenu called');
     if (this.hoverTimeout) {
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = null;
     }
     
     if (this.elements.hoverMenu) {
+      console.log('Adding show class to hover menu');
       this.elements.hoverMenu.classList.add('show');
+      console.log('Hover menu classes:', this.elements.hoverMenu.className);
+      console.log('Hover menu computed style:', window.getComputedStyle(this.elements.hoverMenu).display);
+    } else {
+      console.log('Hover menu element not found in showHoverMenu');
     }
   }
   

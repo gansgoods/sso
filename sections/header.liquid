@@ -267,8 +267,19 @@
   {% endif %}
 </header-component>
 
+{%- comment -%} 用户认证弹窗模态框 {%- endcomment -%}
+{% render 'user-login-modal' %}
+{% render 'user-register-modal' %}
+
 <script
   src="{{ 'header.js' | asset_url }}"
+  type="module"
+></script>
+
+{%- comment -%} 用户认证弹窗系统资源 {%- endcomment -%}
+{{ 'user-auth-demo.css' | asset_url | stylesheet_tag }}
+<script
+  src="{{ 'user-auth-demo.js' | asset_url }}"
   type="module"
 ></script>
 

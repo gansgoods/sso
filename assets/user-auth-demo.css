@@ -38,6 +38,7 @@ body::before {
 }
 
 .auth-hover-menu.show {
+  display: block !important;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
